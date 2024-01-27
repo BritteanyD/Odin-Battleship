@@ -5,12 +5,12 @@ import { Ship } from "./ship";
 
 export class Game {
   constructor() {
-    this.player1Gameboard = new Gameboard();
-    this.player2Gameboard = new Gameboard();
-    this.player1 = new Player("Player 1", this.player2Gameboard);
-    this.player2 = new ComputerPlayer(this.player1Gameboard);
-    this.player2.randomizeShips();
-    this.currentPlayer = this.player1;
+    this.playerGameboard = new Gameboard();
+    this.computerGameboard = new Gameboard();
+    this.player = new Player("Player", this.playerGameboard);
+    this.computer = new ComputerPlayer(this.computerGameboard);
+    this.computer.randomizeShips();
+    this.currentPlayer = this.player;
     this.gameOver = false;
     this.winner = null;
 
@@ -19,7 +19,7 @@ export class Game {
   initializeGame() {
     //const startBtn = document.getElementById("start");
     //startBtn.addEventListener("click", () => {
-      this.player2.randomizeShips();
+      this.computer.randomizeShips();
       //const game = new Game();
       //game.initializeGame();
     //});
@@ -27,8 +27,8 @@ export class Game {
   checkGameOver() {
     // Check for game over condition
     if (
-      this.player1Gameboard.areAllShipsSunk() ||
-      this.player2Gameboard.areAllShipsSunk()
+      this.playerGameboard.areAllShipsSunk() ||
+      this.computerGameboard.areAllShipsSunk()
     ) {
       this.gameOver = true;
       this.winner = this.currentPlayer;
@@ -40,10 +40,10 @@ export class Game {
     return false;
   }
   handleAttack(row, column) {
-    console.log("CURRENT PLAYER", this.currentPlayer);
+    //console.log("CURRENT PLAYER", this.currentPlayer);
     if (!this.gameOver) {
-      if (this.currentPlayer === this.player1) {
-        const isValidAttack = this.player1.attack(row, column);
+      if (this.currentPlayer === this.player) {
+        const isValidAttack = this.player.attack(row, column);
         if (isValidAttack) {
           if (this.checkGameOver()) {
             return;
@@ -51,31 +51,18 @@ export class Game {
           // Switch to the other player
           this.switchPlayer();
         }
-      } else if (this.currentPlayer === this.player2) {
-        this.player2.computerAttack();
+      } else if (this.currentPlayer === this.computer) {
+        this.computer.computerAttack();
         if (this.checkGameOver()) {
           return;
         }
         // Switch to the other player
         this.switchPlayer();
       }
-      // Check for game over condition
     }
   }
   switchPlayer() {
     this.currentPlayer =
-      this.currentPlayer === this.player1 ? this.player2 : this.player1;
-  }
-  playRound(row, column) {
-    // Check if it's the computer player's turn
-    if (this.currentPlayer === this.player2) {
-      const turnDisplay = document.getElementById("whose-go");
-      turnDisplay.innerHTML = "Computers Go";
-      this.handleAttack(); // Computer player makes a random attack
-    } else {
-      const turnDisplay = document.getElementById("whose-go");
-      turnDisplay.innerHTML = "Your Go";
-      this.handleAttack(row, column); // Directly call the player's attack
-    }
+      this.currentPlayer === this.player ? this.computer : this.player;
   }
 }

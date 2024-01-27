@@ -29,7 +29,7 @@ export class Gameboard {
 
       for (let i = row; i < row + ship.length; i++) {
         this.grid[i][column] = ship;
-        console.log(this)
+        console.log(this);
       }
     } else {
       if (column + ship.length > this.gridSize) {
@@ -43,7 +43,7 @@ export class Gameboard {
       }
 
       for (let i = column; i < column + ship.length; i++) {
-        console.log(this)
+        console.log(this);
         this.grid[row][i] = ship;
       }
     }
@@ -51,37 +51,8 @@ export class Gameboard {
     return true; // Ship placed successfully
   };
 
-  rotateShip = (ship) => {
-    // Check if the ship can be rotated without going out of bounds
-    const canRotate =
-      ship.orientation === "horizontal"
-        ? ship.length + ship.row <= this.gridSize
-        : ship.length + ship.column <= this.gridSize;
-
-    if (canRotate) {
-      // Remove the ship from its current position
-      for (let i = 0; i < ship.length; i++) {
-        if (ship.orientation === "horizontal") {
-          this.grid[ship.row][ship.column + i] = null;
-        } else {
-          this.grid[ship.row + i][ship.column] = null;
-        }
-      } // Toggle the ship's orientation and re-place it
-
-      ship.toggleOrientation();
-
-      return this.placeShip(
-        ship,
-        ship.row,
-        ship.column,
-        ship.orientation === "vertical"
-      );
-    }
-
-    return false; // Ship cannot be rotated
-  };
   receiveAttack = (row, column, board = "player") => {
-    console.log("ROW COL", row, column) 
+    console.log("ROW COL", row, column);
     const hit = "X",
       miss = "O";
     // Check for valid coordinates
@@ -102,7 +73,7 @@ export class Gameboard {
 
     // Mark the target as attacked
     if (target === null) {
-      console.log("THIS GRID", this, row, column)
+      console.log("THIS GRID", this, row, column);
       this.grid[row][column] = miss; //'O'
       const square = document.querySelector(`.${board}-${row}-${column}`);
       if (square) {
@@ -122,7 +93,7 @@ export class Gameboard {
 
     // Check if all ships are sunk
     if (this.areAllShipsSunk()) {
-      // Handle the end of the game (e.g., display a message or trigger game over) 
+      // Handle the end of the game (e.g., display a message or trigger game over)
     }
 
     return true; // Valid attack

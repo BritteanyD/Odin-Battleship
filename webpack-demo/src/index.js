@@ -1,6 +1,4 @@
-import { HelloWorld } from "./helloWorld";
 import { Game } from "./game";
-import { check } from "./DOM";
 import "./styles.css";
 
 //const ships = document.querySelectorAll(".ship");
@@ -32,9 +30,9 @@ let game = new Game();
 function attack(row, column) {
   console.log(game)
   // Check if the move is legal (not already attacked)
-  if(game.player2Gameboard.receiveAttack(row, column, "computer")){
+  if(game.computerGameboard.receiveAttack(row, column, "computer")){
     game.switchPlayer()
-    game.player2.computerAttack()
+    game.computer.computerAttack()
     console.log(`attacks (${row}, ${column})`);
     return true; // Valid attack
   } else {
