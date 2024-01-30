@@ -58,12 +58,12 @@ export class ComputerPlayer extends Player {
       }
     }
   }
-  computerAttack() {
+  computerAttack(board) {
     const coordinates = this.getRandomCoordinates();
     if (coordinates) {
       const { row, column } = coordinates;
-      if (this.gameboard.receiveAttack(row, column)) {
-        console.log(`Computer attacks (${row}, ${column})`);
+      if (board.receiveAttack(row, column)) {
+        console.log(`Computer attacks (${row}, ${column})`, board);
         this.usedCoordinates.add(`${row},${column}`);
       }
     } else {

@@ -16,9 +16,10 @@ const carrier = document.querySelector(".carrier-container");
 let isHorizontal = true;
 let game = new Game();
 
-// const ship10 = new Ship(10)
-// game.player1.gameboard.placeShip(ship10, 0, 0)
-// console.log("🚀 ~ game:", game)
+console.log(game)
+const ship10 = new Ship(10)
+game.player.gameboard.placeShip(ship10, 0, 0)
+console.log("🚀 ~ game:", game)
 
 // start();
 // function start() {
@@ -36,9 +37,10 @@ function attack(row, column) {
   console.log(game)
   // Check if the move is legal (not already attacked)
   if(game.computerGameboard.receiveAttack(row, column, "computer")){
-    game.switchPlayer()
-    game.computer.computerAttack()
+    console.log("AFTER PLAYER ATTACK", game)
+    game.computer.computerAttack(game.playerGameboard)
     console.log(`attacks (${row}, ${column})`);
+    console.log("AFTER COMPUTER ATTACK", game)
     return true; // Valid attack
   } else {
     console.log(`already attacked (${row}, ${column})`);
