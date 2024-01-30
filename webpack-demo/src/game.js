@@ -1,10 +1,14 @@
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 import { ComputerPlayer } from "./computer";
-import { Ship } from "./ship";
 
 export class Game {
   constructor() {
+    console.log(`
+    
+    new game
+    
+    `)
     this.playerGameboard = new Gameboard();
     this.computerGameboard = new Gameboard();
     this.player = new Player("Player", this.playerGameboard);
@@ -19,7 +23,7 @@ export class Game {
   initializeGame() {
     //const startBtn = document.getElementById("start");
     //startBtn.addEventListener("click", () => {
-      this.computer.randomizeShips();
+      //this.computer.randomizeShips();
       //const game = new Game();
       //game.initializeGame();
     //});

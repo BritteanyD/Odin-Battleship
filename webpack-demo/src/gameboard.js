@@ -51,7 +51,7 @@ export class Gameboard {
     return true; // Ship placed successfully
   };
 
-  receiveAttack = (row, column, board = "player") => {
+  receiveAttack = (row, column, board= "player") => {
     console.log("ROW COL", row, column);
     const hit = "X",
       miss = "O";
