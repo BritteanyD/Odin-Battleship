@@ -4,11 +4,6 @@ import { ComputerPlayer } from "./computer";
 
 export class Game {
   constructor() {
-    console.log(`
-    
-    new game
-    
-    `)
     this.playerGameboard = new Gameboard();
     this.computerGameboard = new Gameboard();
     this.player = new Player(this.playerGameboard);
@@ -64,9 +59,5 @@ export class Game {
         this.switchPlayer();
       }
     }
-  }
-  switchPlayer() {
-    this.currentPlayer =
-      this.currentPlayer === this.player ? this.computer : this.player;
   }
 }

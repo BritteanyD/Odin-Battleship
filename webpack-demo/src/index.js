@@ -17,7 +17,7 @@ let isHorizontal = true;
 let game = new Game();
 
 console.log(game)
-const ship10 = new Ship(10)
+const ship10 = new Ship(1)
 game.player.gameboard.placeShip(ship10, 0, 0)
 console.log("🚀 ~ game:", game)
 
@@ -38,9 +38,17 @@ function attack(row, column) {
   // Check if the move is legal (not already attacked)
   if(game.computerGameboard.receiveAttack(row, column, "computer")){
     console.log("AFTER PLAYER ATTACK", game)
+    if (game.checkGameOver()) {
+      //to do disable boards and show winner player
+      return;
+    }
     game.computer.computerAttack(game.playerGameboard)
     console.log(`attacks (${row}, ${column})`);
     console.log("AFTER COMPUTER ATTACK", game)
+    if (game.checkGameOver()) {
+      //to do disable boards and show winner computer
+      return;
+    }
     return true; // Valid attack
   } else {
     console.log(`already attacked (${row}, ${column})`);
@@ -100,3 +108,13 @@ function rotate() {
   }
 }
 rotateBtn.addEventListener("click", rotate);
+
+
+/*TO DO
+-ship size 1 @ (0,0), change coordinates line 62, game over computer wins
+-have array of 1 computer ship size 1, attack, gameover player wins
+-disable board and show winner
+-drag and drop play game with 1 ship
+-clean up code
+-drag and drop final game version
+*/
