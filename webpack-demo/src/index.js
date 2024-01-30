@@ -1,4 +1,5 @@
 import { Game } from "./game";
+import { Ship } from "./ship";
 import "./styles.css";
 
 //const ships = document.querySelectorAll(".ship");
@@ -14,6 +15,10 @@ const carrier = document.querySelector(".carrier-container");
 //const userSquare = [];
 let isHorizontal = true;
 let game = new Game();
+
+// const ship10 = new Ship(10)
+// game.player1.gameboard.placeShip(ship10, 0, 0)
+// console.log("🚀 ~ game:", game)
 
 // start();
 // function start() {

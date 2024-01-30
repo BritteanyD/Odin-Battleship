@@ -11,7 +11,7 @@ export class Game {
     `)
     this.playerGameboard = new Gameboard();
     this.computerGameboard = new Gameboard();
-    this.player = new Player("Player", this.playerGameboard);
+    this.player = new Player(this.playerGameboard);
     this.computer = new ComputerPlayer(this.computerGameboard);
     this.computer.randomizeShips();
     this.currentPlayer = this.player;
