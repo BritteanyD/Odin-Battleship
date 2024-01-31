@@ -12,37 +12,44 @@ const submarine = document.querySelector(".submarine-container");
 const cruiser = document.querySelector(".cruiser-container");
 const battleship = document.querySelector(".battleship-container");
 const carrier = document.querySelector(".carrier-container");
+const restartBtn = document.getElementById("restart");
 //const userSquare = [];
 let isHorizontal = true;
 let game = new Game();
 
-console.log(game)
-const ship10 = new Ship(1)
-game.player.gameboard.placeShip(ship10, 0, 0)
-console.log("🚀 ~ game:", game)
+console.log(game);
+const ship10 = new Ship(1);
+game.player.gameboard.placeShip(ship10, 0, 0);
+console.log("🚀 ~ game:", game);
 
-function disableGameBoard () {
+function disableGameBoard() {
   //add class disabled to container
-let box= document.querySelector(".container");
-box.classList.add("disabled");
+  let box = document.querySelector(".container");
+  box.classList.add("disabled");
 }
 
+restartBtn.addEventListener("click", () => {
+  location.reload();
+});
+
 function attack(row, column) {
-  console.log(game)
+  console.log(game);
   // Check if the move is legal (not already attacked)
-  if(game.computerGameboard.receiveAttack(row, column, "computer")){
-    console.log("AFTER PLAYER ATTACK", game)
+  if (game.computerGameboard.receiveAttack(row, column, "computer")) {
+    console.log("AFTER PLAYER ATTACK", game);
     if (game.checkGameOver()) {
       //to do disable boards and show winner player
-      disableGameBoard()
+      disableGameBoard();
+      restartBtn.style.display = "block";
       return;
     }
-    game.computer.computerAttack(game.playerGameboard)
+    game.computer.computerAttack(game.playerGameboard);
     console.log(`attacks (${row}, ${column})`);
-    console.log("AFTER COMPUTER ATTACK", game)
+    console.log("AFTER COMPUTER ATTACK", game);
     if (game.checkGameOver()) {
       //to do disable boards and show winner computer
-      disableGameBoard()
+      disableGameBoard();
+      restartBtn.style.display = "block";
       return;
     }
     return true; // Valid attack
@@ -50,7 +57,7 @@ function attack(row, column) {
     console.log(`already attacked (${row}, ${column})`);
     return false; // Invalid attack
   }
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const rows = 10;
@@ -104,7 +111,6 @@ function rotate() {
   }
 }
 rotateBtn.addEventListener("click", rotate);
-
 
 /*TO DO
 -Correct the winner message
