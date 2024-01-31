@@ -2,8 +2,6 @@ import { Game } from "./game";
 import { Ship } from "./ship";
 import "./styles.css";
 
-//const ships = document.querySelectorAll(".ship");
-//const displayGrid = document.querySelector('.grid-display');
 const userGrid = document.querySelector(".battleship-user");
 const computerGrid = document.querySelector(".battleship-computer");
 const rotateBtn = document.getElementById("rotate");
@@ -13,7 +11,8 @@ const cruiser = document.querySelector(".cruiser-container");
 const battleship = document.querySelector(".battleship-container");
 const carrier = document.querySelector(".carrier-container");
 const restartBtn = document.getElementById("restart");
-//const userSquare = [];
+const displayGrid = document.querySelector(".grid-display");
+let draggedShip = null;
 let isHorizontal = true;
 let game = new Game();
 
@@ -38,7 +37,6 @@ function attack(row, column) {
   if (game.computerGameboard.receiveAttack(row, column, "computer")) {
     console.log("AFTER PLAYER ATTACK", game);
     if (game.checkGameOver()) {
-      //to do disable boards and show winner player
       disableGameBoard();
       restartBtn.style.display = "block";
       return;
@@ -47,7 +45,6 @@ function attack(row, column) {
     console.log(`attacks (${row}, ${column})`);
     console.log("AFTER COMPUTER ATTACK", game);
     if (game.checkGameOver()) {
-      //to do disable boards and show winner computer
       disableGameBoard();
       restartBtn.style.display = "block";
       return;
@@ -111,6 +108,64 @@ function rotate() {
   }
 }
 rotateBtn.addEventListener("click", rotate);
+
+// function updateShipUI(shipElement, row, column, isHorizontal) {
+//   // Assuming you have CSS classes to style the ship on the grid
+//   const shipClass = isHorizontal ? "horizontal-ship" : "vertical-ship";
+
+//   // Add the ship class to the grid cells to visually represent the ship
+//   for (let i = 0; i < shipElement.children.length; i++) {
+//     const cellRow = isHorizontal ? row : row + i;
+//     const cellColumn = isHorizontal ? column + i : column;
+
+//     const userSquare = document.querySelector(`.player-${cellRow}-${cellColumn}`);
+//     if (userSquare) {
+//       userSquare.classList.add(shipClass);
+//     }
+//   }
+// }
+
+//Drag Drop player ships
+// displayGrid.forEach((displayGrid) => {
+//   displayGrid.addEventListener("dragstart", (e) => {
+//     // Set the data for the dragged ship
+//     draggedShip = e.target;
+//   });
+
+//   displayGrid.addEventListener("dragend", () => {
+//     // Clear the data when dragging ends
+//     draggedShip = null;
+//   });
+// });
+
+// userGrid.addEventListener("dragover", (e) => {
+//   e.preventDefault(); // Allow drop
+// });
+
+// userGrid.addEventListener("drop", (e) => {
+//   e.preventDefault(); // Prevent default drop behavior
+
+//   if (draggedShip) {
+//     // Calculate the drop coordinates (row and column) based on the event and grid layout
+//     const gridRect = userGrid.getBoundingClientRect();
+//     const cellWidth = gridRect.width / column; // Assuming a grid layout with equal-sized cells
+//     const cellHeight = gridRect.height / row; // Assuming a grid layout with equal-sized cells // Calculate the row and column based on the mouse pointer position
+
+//     const mouseX = e.clientX - gridRect.left;
+//     const mouseY = e.clientY - gridRect.top;
+//     const row = Math.floor(mouseY / cellHeight);
+//     const column = Math.floor(mouseX / cellWidth); // Check if the drop is valid and place the ship on the user grid
+
+//     if (
+//       game.player.gameboard.placeShip(draggedShip, row, column, isHorizontal)
+//     ) {
+//       // Update the UI to reflect the ship placement
+//       updateShipUI(draggedShip, row, column, isHorizontal);
+//     } // Clear the dragged ship data
+
+//     draggedShip = null;
+//   }
+// });
 
 /*TO DO
 -Correct the winner message

@@ -11,28 +11,18 @@ export class Game {
     this.computer.randomizeShips();
     this.currentPlayer = this.player;
     this.gameOver = false;
-    this.winner = null;
-    this.initializeGame();
-  }
-  initializeGame() {
-    //const startBtn = document.getElementById("start");
-    //startBtn.addEventListener("click", () => {
-      //this.computer.randomizeShips();
-      //const game = new Game();
-      //game.initializeGame();
-    //});
   }
   checkGameOver() {
     // Check for game over condition
-    if (
-      this.playerGameboard.areAllShipsSunk() ||
-      this.computerGameboard.areAllShipsSunk()
-    ) {
+    if (this.playerGameboard.areAllShipsSunk()) {
       this.gameOver = true;
-      this.winner = this.currentPlayer;
       const turnDisplay = document.getElementById("whose-go");
-      turnDisplay.innerHTML =
-        "Game over!" + this.currentPlayer.name + " is the winner!";
+      turnDisplay.innerHTML = "Game over! Computer is the winner!";
+      return true;
+    } else if (this.computerGameboard.areAllShipsSunk()) {
+      this.gameOver = true;
+      const turnDisplay = document.getElementById("whose-go");
+      turnDisplay.innerHTML = "Game over! Player is the winner!";
       return true;
     }
     return false;
