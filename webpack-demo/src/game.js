@@ -12,7 +12,6 @@ export class Game {
     this.currentPlayer = this.player;
     this.gameOver = false;
     this.winner = null;
-
     this.initializeGame();
   }
   initializeGame() {
@@ -33,7 +32,7 @@ export class Game {
       this.winner = this.currentPlayer;
       const turnDisplay = document.getElementById("whose-go");
       turnDisplay.innerHTML =
-        "Game over!" + this.winner.name + " is the winner!";
+        "Game over!" + this.currentPlayer.name + " is the winner!";
       return true;
     }
     return false;

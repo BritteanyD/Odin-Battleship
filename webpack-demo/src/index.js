@@ -21,17 +21,11 @@ const ship10 = new Ship(1)
 game.player.gameboard.placeShip(ship10, 0, 0)
 console.log("🚀 ~ game:", game)
 
-// start();
-// function start() {
-//   const object = new HelloWorld();
-//   object.hi();
-
-//   game = new Game();
-//   game.initializeGame();
-//  console.log("START Game", game);
-
-//   check(game.player1Gameboard);
-// }
+function disableGameBoard () {
+  //add class disabled to container
+let box= document.querySelector(".container");
+box.classList.add("disabled");
+}
 
 function attack(row, column) {
   console.log(game)
@@ -40,6 +34,7 @@ function attack(row, column) {
     console.log("AFTER PLAYER ATTACK", game)
     if (game.checkGameOver()) {
       //to do disable boards and show winner player
+      disableGameBoard()
       return;
     }
     game.computer.computerAttack(game.playerGameboard)
@@ -47,6 +42,7 @@ function attack(row, column) {
     console.log("AFTER COMPUTER ATTACK", game)
     if (game.checkGameOver()) {
       //to do disable boards and show winner computer
+      disableGameBoard()
       return;
     }
     return true; // Valid attack
@@ -111,9 +107,7 @@ rotateBtn.addEventListener("click", rotate);
 
 
 /*TO DO
--ship size 1 @ (0,0), change coordinates line 62, game over computer wins
--have array of 1 computer ship size 1, attack, gameover player wins
--disable board and show winner
+-Correct the winner message
 -drag and drop play game with 1 ship
 -clean up code
 -drag and drop final game version
