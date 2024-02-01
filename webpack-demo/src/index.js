@@ -15,6 +15,7 @@ const ships = document.querySelectorAll(".ship");
 const rows = 10;
 const columns = 10;
 const userSquares = [];
+let isPlacingShip = false;
 let isHorizontal = true;
 let gridBlock = 40.06;
 let game = new Game();
@@ -89,33 +90,75 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //Rotate the ships
-function rotate() {
-  if (isHorizontal) {
-    destroyer.classList.toggle("destroyer-container-vertical");
-    submarine.classList.toggle("submarine-container-vertical");
-    cruiser.classList.toggle("cruiser-container-vertical");
-    battleship.classList.toggle("battleship-container-vertical");
-    carrier.classList.toggle("carrier-container-vertical");
-    isHorizontal = false;
-    return;
+rotateBtn.addEventListener('click', () => {
+  if (!isPlacingShip) {
+    if (isHorizontal) {
+      if (!destroyer.classList.contains("placed")) {
+        destroyer.classList.toggle("destroyer-container-vertical");
+      }
+      if (!submarine.classList.contains("placed")) {
+        submarine.classList.toggle("submarine-container-vertical");
+      }
+      if (!cruiser.classList.contains("placed")) {
+        cruiser.classList.toggle("cruiser-container-vertical");
+      }
+      if (!battleship.classList.contains("placed")) {
+        battleship.classList.toggle("battleship-container-vertical");
+      }
+      if (!carrier.classList.contains("placed")) {
+        carrier.classList.toggle("carrier-container-vertical");
+      }
+      isHorizontal = false;
+    } else {
+      if (!destroyer.classList.contains("placed")) {
+        destroyer.classList.toggle("destroyer-container-vertical");
+      }
+      if (!submarine.classList.contains("placed")) {
+        submarine.classList.toggle("submarine-container-vertical");
+      }
+      if (!cruiser.classList.contains("placed")) {
+        cruiser.classList.toggle("cruiser-container-vertical");
+      }
+      if (!battleship.classList.contains("placed")) {
+        battleship.classList.toggle("battleship-container-vertical");
+      }
+      if (!carrier.classList.contains("placed")) {
+        carrier.classList.toggle("carrier-container-vertical");
+      }
+      isHorizontal = true;
+    }
   }
-  if (!isHorizontal) {
-    destroyer.classList.toggle("destroyer-container-vertical");
-    submarine.classList.toggle("submarine-container-vertical");
-    cruiser.classList.toggle("cruiser-container-vertical");
-    battleship.classList.toggle("battleship-container-vertical");
-    carrier.classList.toggle("carrier-container-vertical");
-    isHorizontal = true;
-    return;
-  }
-}
-rotateBtn.addEventListener("click", rotate);
+});
+ 
+// rotateBtn.addEventListener("click",() => {
+//   if (!isPlacingShip) {
+//     if (isHorizontal) {
+//       destroyer.classList.toggle("destroyer-container-vertical");
+//       submarine.classList.toggle("submarine-container-vertical");
+//       cruiser.classList.toggle("cruiser-container-vertical");
+//       battleship.classList.toggle("battleship-container-vertical");
+//       carrier.classList.toggle("carrier-container-vertical");
+//       isHorizontal = false;
+//     } else {
+//       destroyer.classList.toggle("destroyer-container-vertical");
+//       submarine.classList.toggle("submarine-container-vertical");
+//       cruiser.classList.toggle("cruiser-container-vertical");
+//       battleship.classList.toggle("battleship-container-vertical");
+//       carrier.classList.toggle("carrier-container-vertical");
+//       isHorizontal = true;
+//     }
+//   }
+// });
 
 //Drag and drop player ships
 ships.forEach((ship) => {
   ship.addEventListener("dragstart", (event) => {
     event.dataTransfer.setData("text/plain", ship.id);
+    isPlacingShip = true;
     console.log(event);
+  });
+  ship.addEventListener("dragend", () => {
+    isPlacingShip = false;
   });
 });
 
@@ -174,7 +217,7 @@ userGrid.addEventListener("drop", (event) => {
   if (placementSuccessful) {
     // Append the ship element to the grid for visual representation
     userSquares[row * columns + column].appendChild(shipElement);
-    //userGrid.appendChild(gridSquare);
+    shipElement.classList.add("placed");
   } else {
     // Handle invalid ship placement (e.g., show an error message to the user)
     console.log("Invalid ship placement");
