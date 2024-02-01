@@ -71,6 +71,10 @@ body {
   margin-top: 10px;
 }
 
+.grid-square {
+  background-color: rgb(255, 221, 0);
+}
+
 .destroyer-container {
   width: 80px;
   height: 40px;
@@ -153,26 +157,6 @@ body {
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
-}
-
-.destroyer {
-  background-color: rgb(255, 221, 0);
-}
-
-.submarine {
-  background-color: rgb(255, 221, 0);
-}
-
-.cruiser {
-  background-color: rgb(255, 221, 0);
-}
-
-.battleship {
-  background-color: rgb(255, 221, 0);
-}
-
-.carrier {
-  background-color: rgb(255, 221, 0);
 }
 
 .square.hit {

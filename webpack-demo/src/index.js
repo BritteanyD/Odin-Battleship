@@ -11,15 +11,15 @@ const cruiser = document.querySelector(".cruiser-container");
 const battleship = document.querySelector(".battleship-container");
 const carrier = document.querySelector(".carrier-container");
 const restartBtn = document.getElementById("restart");
-const displayGrid = document.querySelector(".grid-display");
-let draggedShip = null;
+const ships = document.querySelectorAll(".ship");
 let isHorizontal = true;
+let gridBlock = 40.06;
 let game = new Game();
 
-console.log(game);
-const ship10 = new Ship(1);
-game.player.gameboard.placeShip(ship10, 0, 0);
-console.log("🚀 ~ game:", game);
+// console.log(game);
+// const ship10 = new Ship(1);
+// game.player.gameboard.placeShip(ship10, 0, 0);
+// console.log("🚀 ~ game:", game);
 
 function disableGameBoard() {
   //add class disabled to container
@@ -109,67 +109,71 @@ function rotate() {
 }
 rotateBtn.addEventListener("click", rotate);
 
-// function updateShipUI(shipElement, row, column, isHorizontal) {
-//   // Assuming you have CSS classes to style the ship on the grid
-//   const shipClass = isHorizontal ? "horizontal-ship" : "vertical-ship";
+//Drag and drop player ships
+ships.forEach((ship) => {
+  ship.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("text/plain", ship.id);
+    console.log(event);
+  });
+});
 
-//   // Add the ship class to the grid cells to visually represent the ship
-//   for (let i = 0; i < shipElement.children.length; i++) {
-//     const cellRow = isHorizontal ? row : row + i;
-//     const cellColumn = isHorizontal ? column + i : column;
+userGrid.addEventListener("dragover", function (event) {
+  event.preventDefault(); // Allow drop
+});
 
-//     const userSquare = document.querySelector(`.player-${cellRow}-${cellColumn}`);
-//     if (userSquare) {
-//       userSquare.classList.add(shipClass);
-//     }
-//   }
-// }
+function getShipLengthFromId(shipId) {
+  // Define a mapping of ship IDs to lengths
+  const shipIdToLength = {
+    "destroyer-container": 2,
+    "submarine-container": 3,
+    "cruiser-container": 3,
+    "battleship-container": 4,
+    "carrier-container": 5,
+  };
 
-//Drag Drop player ships
-// displayGrid.forEach((displayGrid) => {
-//   displayGrid.addEventListener("dragstart", (e) => {
-//     // Set the data for the dragged ship
-//     draggedShip = e.target;
-//   });
+  // Use the mapping to retrieve the length based on the shipId
+  const shipLength = shipIdToLength[shipId];
 
-//   displayGrid.addEventListener("dragend", () => {
-//     // Clear the data when dragging ends
-//     draggedShip = null;
-//   });
-// });
+  // Return the length or a default value if not found
+  return shipLength || 0;
+}
 
-// userGrid.addEventListener("dragover", (e) => {
-//   e.preventDefault(); // Allow drop
-// });
+userGrid.addEventListener("drop", (event) => {
+  event.preventDefault();
 
-// userGrid.addEventListener("drop", (e) => {
-//   e.preventDefault(); // Prevent default drop behavior
+     const shipId = event.dataTransfer.getData("text/plain");
+     const shipElement = document.getElementById(shipId);
 
-//   if (draggedShip) {
-//     // Calculate the drop coordinates (row and column) based on the event and grid layout
-//     const gridRect = userGrid.getBoundingClientRect();
-//     const cellWidth = gridRect.width / column; // Assuming a grid layout with equal-sized cells
-//     const cellHeight = gridRect.height / row; // Assuming a grid layout with equal-sized cells // Calculate the row and column based on the mouse pointer position
+    // Calculate the row and column where the ship was dropped
+    const { top, left } = userGrid.getBoundingClientRect();
+    const row = Math.floor((event.clientY - top) / gridBlock); // gridSize is the size of each grid square
+    const column = Math.floor((event.clientX - left) / gridBlock);
 
-//     const mouseX = e.clientX - gridRect.left;
-//     const mouseY = e.clientY - gridRect.top;
-//     const row = Math.floor(mouseY / cellHeight);
-//     const column = Math.floor(mouseX / cellWidth); // Check if the drop is valid and place the ship on the user grid
+    // Create a new ship object with the appropriate length
+    const shipLength = getShipLengthFromId(shipId);
+    const newShip = new Ship(shipLength);
 
-//     if (
-//       game.player.gameboard.placeShip(draggedShip, row, column, isHorizontal)
-//     ) {
-//       // Update the UI to reflect the ship placement
-//       updateShipUI(draggedShip, row, column, isHorizontal);
-//     } // Clear the dragged ship data
+    // Use your game logic to place the ship on the gameboard
+    const placementSuccessful = game.player.gameboard.placeShip(
+      newShip,
+      row,
+      column,
+      isHorizontal
+    );
 
-//     draggedShip = null;
-//   }
-// });
+    if (placementSuccessful) {
+      // Append the ship element to the grid for visual representation
+      const gridSquare = document.createElement("div");
+      gridSquare.className = "grid-square"; // Style this as needed
+      gridSquare.appendChild(shipElement);
+      userGrid.appendChild(gridSquare);
+    } else {
+      // Handle invalid ship placement (e.g., show an error message to the user)
+      console.log("Invalid ship placement");
+    }
+});
 
 /*TO DO
--Correct the winner message
 -drag and drop play game with 1 ship
--clean up code
 -drag and drop final game version
 */

@@ -51,7 +51,7 @@ export class Gameboard {
     return true; // Ship placed successfully
   };
 
-  receiveAttack = (row, column, board= "player") => {
+  receiveAttack = (row, column, board = "player") => {
     console.log("ROW COL", row, column);
     const hit = "X",
       miss = "O";
@@ -85,15 +85,6 @@ export class Gameboard {
       if (square) {
         square.classList.add("hit");
       }
-      // Check if the ship is sunk
-      if (this.isShipSunk(row, column)) {
-        // Handle the case when a ship is sunk (e.g., update some state or message)
-      }
-    }
-
-    // Check if all ships are sunk
-    if (this.areAllShipsSunk()) {
-      // Handle the end of the game (e.g., display a message or trigger game over)
     }
 
     return true; // Valid attack

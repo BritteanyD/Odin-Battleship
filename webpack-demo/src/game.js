@@ -28,7 +28,6 @@ export class Game {
     return false;
   }
   handleAttack(row, column) {
-    //console.log("CURRENT PLAYER", this.currentPlayer);
     if (!this.gameOver) {
       if (this.currentPlayer === this.player) {
         const isValidAttack = this.player.attack(row, column);
