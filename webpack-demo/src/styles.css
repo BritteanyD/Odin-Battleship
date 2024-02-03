@@ -7,6 +7,16 @@ body {
 .title {
   display: flex;
   justify-content: center;
+  font-size:x-large;
+  color: rgb(255, 221, 0);
+  text-shadow: 2px 2px red;
+  background-size: 187px;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyqUpEDzWIS44QOnYZn45zGS24cOqvDTOfDCyFz49_z1cW62_Nov2zbzL1btb8wmnKAyY&usqp=CAU);
+}
+
+.title-container {
+  backdrop-filter: blur(3px);
+  width: 203px;
 }
 
 .container {
@@ -33,7 +43,7 @@ body {
 }
 
 #restart {
-  display:none;
+  display: none;
 }
 
 .battleship-user,
@@ -43,7 +53,7 @@ body {
   margin: 2vmin;
   display: grid;
   background-color: rgb(5, 106, 247);
-  grid-template-rows: repeat(10, 40px/*1fr 5.44vmin*/);
+  grid-template-rows: repeat(10, 40px /*1fr 5.44vmin*/);
   grid-template-columns: repeat(10, 40px /*1fr 5.44vmin*/);
 }
 

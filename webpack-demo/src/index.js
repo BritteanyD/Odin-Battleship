@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const column = parseInt(computerSquare.dataset.column);
         // Call the attack function for the computer's grid
         attack(row, column);
+        randomBtn.style.display = "none"
       });
 
       userGrid.appendChild(userSquare);
