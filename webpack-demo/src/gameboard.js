@@ -29,7 +29,7 @@ export class Gameboard {
 
       for (let i = row; i < row + ship.length; i++) {
         this.grid[i][column] = ship;
-        //console.log(this);
+        
       }
     } else {
       if (column + ship.length > this.gridSize) {
@@ -43,7 +43,7 @@ export class Gameboard {
       }
 
       for (let i = column; i < column + ship.length; i++) {
-        //console.log(this);
+        
         this.grid[row][i] = ship;
       }
     }
@@ -52,7 +52,7 @@ export class Gameboard {
   };
 
   receiveAttack = (row, column, board = "player") => {
-    //console.log("ROW COL", row, column);
+    
     const hit = "X",
       miss = "O";
     // Check for valid coordinates
@@ -73,7 +73,7 @@ export class Gameboard {
 
     // Mark the target as attacked
     if (target === null) {
-      //console.log("THIS GRID", this, row, column);
+      
       this.grid[row][column] = miss; //'O'
       const square = document.querySelector(`.${board}-${row}-${column}`);
       if (square) {
@@ -83,7 +83,7 @@ export class Gameboard {
       this.grid[row][column] = hit; //'X'
       const square = document.querySelector(`.${board}-${row}-${column}`);
       if (square) {
-        
+
         square.classList.add("hit");
       }
     }

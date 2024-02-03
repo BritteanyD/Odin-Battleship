@@ -65,7 +65,6 @@ body {
   border: 1px solid rgba(235, 217, 144, 0.683);
 }
 
-.ship-container,
 .hidden-info,
 .hidden-info2 {
   display: flex;

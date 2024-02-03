@@ -43,18 +43,6 @@ export class ComputerPlayer extends Player {
           coordinates.column,
           isVertical
         );
-
-        // Debugging: Print ship placement details
-        if (isValidPlacement) {
-          console.log(
-            `Placed ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
-          );
-          console.log(this);
-        } else {
-          console.log(
-            `Failed to place ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
-          );
-        }
       }
     }
   }

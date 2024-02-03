@@ -22,7 +22,6 @@ function startGame() {
 function paintPlayerShips() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
-      console.log(`i, j: ${i}, ${j} ${game.playerGameboard.grid[i][j]}`);
       const curCell = game.playerGameboard.grid[i][j];
       if (!curCell && typeof curCell == "object") {
         console.log("Value of x is null");
@@ -30,7 +29,6 @@ function paintPlayerShips() {
         console.log("Value of x is not null", i, j);
         const cell = document.querySelector(`.square.player-${i}-${j}`);
         cell.classList.add("playerShip");
-        console.log("CELL", cell);
       }
     }
   }
@@ -100,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const column = parseInt(computerSquare.dataset.column);
         // Call the attack function for the computer's grid
         attack(row, column);
-        randomBtn.style.display = "none"
+        randomBtn.style.display = "none";
       });
 
       userGrid.appendChild(userSquare);
@@ -109,5 +107,4 @@ document.addEventListener("DOMContentLoaded", () => {
       userSquares.push(userSquare);
     }
   }
-  console.log("ADDING SQUARES");
 });
