@@ -1,6 +1,4 @@
 import { Game } from "./game";
-import { Ship } from "./ship";
-import { Player } from "./player";
 import "./styles.css";
 
 const userGrid = document.querySelector(".battleship-user");
@@ -10,7 +8,6 @@ const randomBtn = document.getElementById("random");
 const rows = 10;
 const columns = 10;
 const userSquares = [];
-let usedCoordinates = new Set();
 let game;
 setTimeout(startGame, 500);
 
@@ -42,48 +39,8 @@ function disableGameBoard() {
   box.classList.add("disabled");
 }
 
-function getRandomCoordinates() {
-  const availableCoordinates = [];
-  for (let row = 0; row < Player.gameboard.rows; row++) {
-    for (let column = 0; column < Player.gameboard.columns; column++) {
-      const coordinate = `${row},${column}`;
-      if (!usedCoordinates.has(coordinate)) {
-        availableCoordinates.push({ row, column });
-      }
-    }
-  }
-  if (availableCoordinates.length === 0) {
-    return null; //All coordinates have been used
-  }
-  const randomIndex = Math.floor(Math.random() * availableCoordinates.length);
-  return availableCoordinates[randomIndex];
-}
-
-function randomizeShips() {
-  const shipLengths = [2, 3, 3, 4, 5];
-  for (const length of shipLengths) {
-    let ship = new Ship(length);
-    let coordinates;
-    let isVertical;
-    let isValidPlacement = false;
-
-    // Keep trying until a valid ship placement is found
-    while (!isValidPlacement) {
-      coordinates = getRandomCoordinates();
-      isVertical = Math.random() < 0.5; // Randomly choose vertical or horizontal placement
-      // Attempt to place the ship
-      isValidPlacement = Player.gameboard.placeShip(
-        ship,
-        coordinates.row,
-        coordinates.column,
-        isVertical
-      );
-    }
-  }
-}
-
 randomBtn.addEventListener("click", () => {
-  randomizeShips();
+  location.reload();
 });
 
 restartBtn.addEventListener("click", () => {
