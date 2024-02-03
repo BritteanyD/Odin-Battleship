@@ -4,7 +4,7 @@ import "./styles.css";
 
 const userGrid = document.querySelector(".battleship-user");
 const computerGrid = document.querySelector(".battleship-computer");
-const rotateBtn = document.getElementById("rotate");
+const randomBtn = document.getElementById("random");
 const destroyer = document.querySelector(".destroyer-container");
 const submarine = document.querySelector(".submarine-container");
 const cruiser = document.querySelector(".cruiser-container");
@@ -17,7 +17,6 @@ const columns = 10;
 const userSquares = [];
 let isPlacingShip = false;
 let isHorizontal = true;
-let gridBlock = 40.06;
 let game = new Game();
 
 // console.log(game);
@@ -89,140 +88,113 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//Rotate the ships
-rotateBtn.addEventListener('click', () => {
-  if (!isPlacingShip) {
-    if (isHorizontal) {
-      if (!destroyer.classList.contains("placed")) {
-        destroyer.classList.toggle("destroyer-container-vertical");
-      }
-      if (!submarine.classList.contains("placed")) {
-        submarine.classList.toggle("submarine-container-vertical");
-      }
-      if (!cruiser.classList.contains("placed")) {
-        cruiser.classList.toggle("cruiser-container-vertical");
-      }
-      if (!battleship.classList.contains("placed")) {
-        battleship.classList.toggle("battleship-container-vertical");
-      }
-      if (!carrier.classList.contains("placed")) {
-        carrier.classList.toggle("carrier-container-vertical");
-      }
-      isHorizontal = false;
-    } else {
-      if (!destroyer.classList.contains("placed")) {
-        destroyer.classList.toggle("destroyer-container-vertical");
-      }
-      if (!submarine.classList.contains("placed")) {
-        submarine.classList.toggle("submarine-container-vertical");
-      }
-      if (!cruiser.classList.contains("placed")) {
-        cruiser.classList.toggle("cruiser-container-vertical");
-      }
-      if (!battleship.classList.contains("placed")) {
-        battleship.classList.toggle("battleship-container-vertical");
-      }
-      if (!carrier.classList.contains("placed")) {
-        carrier.classList.toggle("carrier-container-vertical");
-      }
-      isHorizontal = true;
-    }
-  }
-});
- 
-// rotateBtn.addEventListener("click",() => {
+// //Rotate the ships
+// rotateBtn.addEventListener('click', () => {
 //   if (!isPlacingShip) {
 //     if (isHorizontal) {
-//       destroyer.classList.toggle("destroyer-container-vertical");
-//       submarine.classList.toggle("submarine-container-vertical");
-//       cruiser.classList.toggle("cruiser-container-vertical");
-//       battleship.classList.toggle("battleship-container-vertical");
-//       carrier.classList.toggle("carrier-container-vertical");
+//       if (!destroyer.classList.contains("placed")) {
+//         destroyer.classList.toggle("destroyer-container-vertical");
+//       }
+//       if (!submarine.classList.contains("placed")) {
+//         submarine.classList.toggle("submarine-container-vertical");
+//       }
+//       if (!cruiser.classList.contains("placed")) {
+//         cruiser.classList.toggle("cruiser-container-vertical");
+//       }
+//       if (!battleship.classList.contains("placed")) {
+//         battleship.classList.toggle("battleship-container-vertical");
+//       }
+//       if (!carrier.classList.contains("placed")) {
+//         carrier.classList.toggle("carrier-container-vertical");
+//       }
 //       isHorizontal = false;
 //     } else {
-//       destroyer.classList.toggle("destroyer-container-vertical");
-//       submarine.classList.toggle("submarine-container-vertical");
-//       cruiser.classList.toggle("cruiser-container-vertical");
-//       battleship.classList.toggle("battleship-container-vertical");
-//       carrier.classList.toggle("carrier-container-vertical");
+//       if (!destroyer.classList.contains("placed")) {
+//         destroyer.classList.toggle("destroyer-container-vertical");
+//       }
+//       if (!submarine.classList.contains("placed")) {
+//         submarine.classList.toggle("submarine-container-vertical");
+//       }
+//       if (!cruiser.classList.contains("placed")) {
+//         cruiser.classList.toggle("cruiser-container-vertical");
+//       }
+//       if (!battleship.classList.contains("placed")) {
+//         battleship.classList.toggle("battleship-container-vertical");
+//       }
+//       if (!carrier.classList.contains("placed")) {
+//         carrier.classList.toggle("carrier-container-vertical");
+//       }
 //       isHorizontal = true;
 //     }
 //   }
 // });
 
-//Drag and drop player ships
-ships.forEach((ship) => {
-  ship.addEventListener("dragstart", (event) => {
-    event.dataTransfer.setData("text/plain", ship.id);
-    isPlacingShip = true;
-    console.log(event);
-  });
-  ship.addEventListener("dragend", () => {
-    isPlacingShip = false;
-  });
-});
+// //Drag and drop player ships
+// ships.forEach((ship) => {
+//   ship.addEventListener("dragstart", (event) => {
+//     event.dataTransfer.setData("text/plain", ship.id);
+//     isPlacingShip = true;
+//     console.log(event);
+//   });
+//   ship.addEventListener("dragend", () => {
+//     isPlacingShip = false;
+//   });
+// });
 
-userGrid.addEventListener("dragover", function (event) {
-  event.preventDefault(); // Allow drop
-});
+// userGrid.addEventListener("dragover", function (event) {
+//   event.preventDefault(); // Allow drop
+// });
 
-function getShipLengthFromId(shipId) {
-  // Define a mapping of ship IDs to lengths
-  const shipIdToLength = {
-    "destroyer-container": 2,
-    "submarine-container": 3,
-    "cruiser-container": 3,
-    "battleship-container": 4,
-    "carrier-container": 5,
-  };
+// function getShipLengthFromId(shipId) {
+//   // Define a mapping of ship IDs to lengths
+//   const shipIdToLength = {
+//     "destroyer-container": 2,
+//     "submarine-container": 3,
+//     "cruiser-container": 3,
+//     "battleship-container": 4,
+//     "carrier-container": 5,
+//   };
 
-  // Use the mapping to retrieve the length based on the shipId
-  const shipLength = shipIdToLength[shipId];
+//   // Use the mapping to retrieve the length based on the shipId
+//   const shipLength = shipIdToLength[shipId];
 
-  // Return the length or a default value if not found
-  return shipLength || 0;
-}
+//   // Return the length or a default value if not found
+//   return shipLength || 0;
+// }
 
-userGrid.addEventListener("drop", (event) => {
-  event.preventDefault();
+// userGrid.addEventListener("drop", (event) => {
+//   event.preventDefault();
 
-  const shipId = event.dataTransfer.getData("text/plain");
-  const shipElement = document.getElementById(shipId);
+//   const shipId = event.dataTransfer.getData("text/plain");
+//   const shipElement = document.getElementById(shipId);
 
-  // Calculate the row and column where the ship was dropped
-  const { top, left } = userGrid.getBoundingClientRect();
-  const row = Math.floor((event.clientY - top) / gridBlock); // gridSize is the size of each grid square
-  const column = Math.floor((event.clientX - left) / gridBlock);
+//   // Calculate the row and column where the ship was dropped
+//   const { top, left } = userGrid.getBoundingClientRect();
+//   const gridBlock = 40; //each square size
+//   const row = Math.floor((event.clientY - top) / gridBlock);
+//   const column = Math.floor((event.clientX - left) / gridBlock);
 
-  // Remove any previously appended ship at this location
-  const existingShip = userGrid.querySelector(
-    `[data-row="${row}"][data-column="${column}"]`
-  );
-  if (existingShip) {
-    existingShip.remove();
-  }
+//   // Create a new ship object with the appropriate length
+//   const shipLength = getShipLengthFromId(shipId);
+//   const newShip = new Ship(shipLength);
 
-  // Create a new ship object with the appropriate length
-  const shipLength = getShipLengthFromId(shipId);
-  const newShip = new Ship(shipLength);
+//   // Use your game logic to place the ship on the gameboard
+//   const placementSuccessful = game.player.gameboard.placeShip(
+//     newShip,
+//     row,
+//     column,
+//     isHorizontal
+//   );
 
-  // Use your game logic to place the ship on the gameboard
-  const placementSuccessful = game.player.gameboard.placeShip(
-    newShip,
-    row,
-    column,
-    isHorizontal
-  );
-
-  if (placementSuccessful) {
-    // Append the ship element to the grid for visual representation
-    userSquares[row * columns + column].appendChild(shipElement);
-    shipElement.classList.add("placed");
-  } else {
-    // Handle invalid ship placement (e.g., show an error message to the user)
-    console.log("Invalid ship placement");
-  }
-});
+//   if (placementSuccessful) {
+//     // Append the ship element to the grid for visual representation
+//     userSquares[row * columns + column].appendChild(shipElement);
+//     shipElement.classList.add("placed");
+//   } else {
+//     // Handle invalid ship placement (e.g., show an error message to the user)
+//     console.log("Invalid ship placement");
+//   }
+// });
 
 /*TO DO
 -drag and drop play game with 1 ship

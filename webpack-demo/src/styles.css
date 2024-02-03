@@ -21,7 +21,7 @@ body {
 }
 
 #restart,
-#rotate {
+#random {
   font-size: 20px;
   font-weight: 400;
   background-color: hsla(130, 92%, 42%, 0.907);
@@ -43,8 +43,8 @@ body {
   margin: 2vmin;
   display: grid;
   background-color: rgb(5, 106, 247);
-  grid-template-rows: repeat(10, 5.44vmin);
-  grid-template-columns: repeat(10, 5.44vmin);
+  grid-template-rows: repeat(10, 40px/*1fr 5.44vmin*/);
+  grid-template-columns: repeat(10, 40px /*1fr 5.44vmin*/);
 }
 
 .battleship-computer {

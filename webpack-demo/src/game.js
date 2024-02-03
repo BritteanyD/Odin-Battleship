@@ -9,6 +9,7 @@ export class Game {
     this.player = new Player(this.playerGameboard);
     this.computer = new ComputerPlayer(this.computerGameboard);
     this.computer.randomizeShips();
+    this.player.randomizeShips();
     this.currentPlayer = this.player;
     this.gameOver = false;
   }
