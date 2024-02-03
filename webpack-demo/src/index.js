@@ -17,9 +17,34 @@ const columns = 10;
 const userSquares = [];
 let isPlacingShip = false;
 let isHorizontal = true;
-let game = new Game();
+let game;
+setTimeout(startGame, 500);
 
-// console.log(game);
+function startGame() {
+  game = new Game();
+  paintPlayerShips();
+}
+
+function paintPlayerShips() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      console.log(`i, j: ${i}, ${j} ${game.playerGameboard.grid[i][j]}`);
+      const curCell = game.playerGameboard.grid[i][j];
+      if (!curCell && typeof curCell == "object") {
+        console.log("Value of x is null");
+      } else {
+        console.log("Value of x is not null", i, j);
+        const cell = document.querySelector(
+          `.square.player-${i}-${j}`
+        );
+        console.log("CELL", cell);
+        cell.style.backgroundColor = "yellow";
+      }
+    }
+  }
+}
+
+//console.log(game);
 // const ship10 = new Ship(1);
 // game.player.gameboard.placeShip(ship10, 0, 0);
 // console.log("🚀 ~ game:", game);
@@ -86,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       userSquares.push(userSquare);
     }
   }
+  console.log("ADDING SQUARES");
 });
 
 // //Rotate the ships

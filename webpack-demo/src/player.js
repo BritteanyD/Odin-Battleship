@@ -28,7 +28,7 @@ export class Player {
       let coordinates;
       let isVertical;
       let isValidPlacement = false;
-
+      
       // Keep trying until a valid ship placement is found
       while (!isValidPlacement) {
         coordinates = this.getRandomCoordinates();
@@ -43,14 +43,23 @@ export class Player {
 
         // Debugging: Print ship placement details
         if (isValidPlacement) {
-          console.log(
-            `Placed ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
-          );
-          console.log(this);
-        } else {
-          console.log(
-            `Failed to place ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
-          );
+        //   console.log(
+        //     `Placed ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
+        //   );
+        //   console.log("HERE",this);
+        //   console.log(this.gameboard.grid);
+        //   console.log("MODIFYING SQUARES")
+        //   for (let i = 0; i < length; i++) {
+        //     const cell = document.querySelector(
+        //       `.square.player-${coordinates.row}-${coordinates.column}`
+        //     );
+        //     console.log("CELL", cell)
+        //     cell.style.backgroundColor = "red" //`rgb(${255, 221, 0})` ; // Add a CSS class to indicate a ship is present
+        //   }
+        // } else {
+        //   console.log(
+        //     `Failed to place ship of length ${length} at (${coordinates.row}, ${coordinates.column}), Vertical: ${isVertical}`
+        //   );
         }
       }
     }

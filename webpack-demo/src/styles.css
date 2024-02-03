@@ -71,6 +71,10 @@ body {
   margin-top: 10px;
 }
 
+.shipColor {
+  background-color: rgb(255, 221, 0);
+}
+
 .destroyer-container {
   width: 80px;
   height: 40px;
