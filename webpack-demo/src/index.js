@@ -14,6 +14,9 @@ setTimeout(startGame, 500);
 function startGame() {
   game = new Game();
   paintPlayerShips();
+  const displayTurn = document.getElementById("whose-go");
+  displayTurn.innerHTML =
+    "When you're ready, click on the computer's board to make an attack";
 }
 
 function paintPlayerShips() {
