@@ -83,6 +83,7 @@ export class Gameboard {
       this.grid[row][column] = hit; //'X'
       const square = document.querySelector(`.${board}-${row}-${column}`);
       if (square) {
+        
         square.classList.add("hit");
       }
     }

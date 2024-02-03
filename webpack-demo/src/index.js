@@ -37,8 +37,9 @@ function paintPlayerShips() {
         const cell = document.querySelector(
           `.square.player-${i}-${j}`
         );
+        cell.classList.add("playerShip");
         console.log("CELL", cell);
-        cell.style.backgroundColor = "yellow";
+        //cell.style.backgroundColor = "yellow";
       }
     }
   }
