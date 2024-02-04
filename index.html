@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../src/styles.css" />
+    <title>BATTLESHIP</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Battleship</h1>
+    </div>
+
+    <div class="hidden-info">
+      <h3 id="whose-go"></h3>
+      <h3 id="info"></h3>
+    </div>
+
+    <div class="container">
+      <div class="battleship-user"></div>
+      <div class="battleship-computer"></div>
+    </div>
+    <div class="hidden-info2">
+      <button id="random">Change Ship Placements</button>
+      <button id="restart">Restart Game</button>
+    </div>
+
+    <div class="ship-container">
+      <div class="grid-display">
+        <div
+          class="ship destroyer-container"
+          id="destroyer-1"
+          draggable="true"
+        ></div>
+        <div
+          class="ship submarine-container"
+          id="submarine-1"
+          draggable="true"
+        ></div>
+        <div
+          class="ship cruiser-container"
+          id="cruiser-1"
+          draggable="true"
+        ></div>
+        <div
+          class="ship battleship-container"
+          id="battleship-1"
+          draggable="true"
+        ></div>
+        <div
+          class="ship carrier-container"
+          id="carrier-1"
+          draggable="true"
+        ></div>
+      </div>
+    </div>
+
+    <script src="./bundle.js"></script>
+  </body>
+</html>
